@@ -1,0 +1,28 @@
+{
+  "name": "@authoritydmc/flags-edge",
+  "version": "1.0.0",
+  "description": "Zero-dependency Edge & Serverless client SDK for Cloudflare Workers, Vercel Edge, and Next.js Middleware with sub-millisecond evaluation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Raj Dubey <com.mailuser@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "edge",
+    "cloudflare-workers",
+    "vercel-edge",
+    "nextjs-middleware",
+    "feature-flags",
+    "flags-local"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authoritydmc/flags-local.git",
+    "directory": "packages/client-edge"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

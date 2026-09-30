@@ -1,0 +1,19 @@
+name: flags_local
+description: High-performance Flutter and Dart client SDK for flags-local feature flag management with offline memory caching.
+version: 1.0.0
+homepage: https://github.com/authoritydmc/flags-local
+repository: https://github.com/authoritydmc/flags-local/tree/main/packages/client-flutter
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  crypto: ^3.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
