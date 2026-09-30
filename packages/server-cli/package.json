@@ -1,7 +1,7 @@
 {
   "name": "flags-local",
-  "version": "1.1.0",
-  "description": "Zero-dependency local & remote Feature Flags server with live UI, SSE stream, Redis cluster sync, and multi-environment management",
+  "version": "1.2.0",
+  "description": "Zero-dependency local & remote Feature Flags server with live UI, SQLite persistence, SSE stream, Redis cluster sync, and multi-environment management",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -14,6 +14,7 @@
     "unleash-alternative",
     "flagsmith-alternative",
     "feature-management",
+    "sqlite",
     "redis",
     "sse",
     "server"
@@ -30,9 +31,11 @@
     "start": "node bin/flags-local.js"
   },
   "dependencies": {
-    "redis": "^4.7.1"
+    "better-sqlite3": "^11.8.1",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^20.17.19",
     "typescript": "^5.7.3"
   }

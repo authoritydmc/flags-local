@@ -7,14 +7,14 @@ import { FeatureFlag } from './types';
 export interface ServerOptions {
   port?: number;
   host?: string;
-  storePath?: string;
+  dbPath?: string;
   redisUrl?: string;
 }
 
 export function createFlagsServer(options: ServerOptions = {}) {
   const port = options.port || 4040;
   const host = options.host || '0.0.0.0';
-  const store = new FlagStore({ filePath: options.storePath, redisUrl: options.redisUrl });
+  const store = new FlagStore({ dbPath: options.dbPath, redisUrl: options.redisUrl });
 
   const sseClients: Set<http.ServerResponse> = new Set();
 
@@ -63,7 +63,7 @@ export function createFlagsServer(options: ServerOptions = {}) {
       return;
     }
 
-    // 3. GET /api/v1/flags (optional filter by ?tag=... or ?env=...)
+    // 3. GET /api/v1/flags
     if (pathname === '/api/v1/flags' && req.method === 'GET') {
       const tag = url.searchParams.get('tag');
       let flags = store.getAll();
@@ -152,7 +152,7 @@ export function createFlagsServer(options: ServerOptions = {}) {
         if (options.redisUrl) {
           console.log(`🔄 Backend:    Redis Cluster (${options.redisUrl})\n`);
         } else {
-          console.log(`💾 Backend:    Local JSON File\n`);
+          console.log(`🗄️  Backend:    SQLite Database (${options.dbPath || 'flags.db'})\n`);
         }
       });
     }
