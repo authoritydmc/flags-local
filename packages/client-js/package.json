@@ -1,0 +1,23 @@
+{
+  "name": "@authoritydmc/flags-client",
+  "version": "1.0.0",
+  "description": "Universal JavaScript / TypeScript client SDK for flags-local with real-time SSE updates and offline evaluation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Raj Dubey <com.mailuser@gmail.com>",
+  "license": "MIT",
+  "keywords": ["feature-flags", "flags-local", "feature-toggles", "client", "sdk", "sse"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authoritydmc/flags-local.git",
+    "directory": "packages/client-js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node dist/index.test.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^20.17.19"
+  }
+}

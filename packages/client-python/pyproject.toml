@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flags-local"
+version = "1.0.0"
+description = "Fast, lightweight Python client SDK for flags-local feature flag management"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Raj Dubey", email = "com.mailuser@gmail.com"}
+]
+dependencies = [
+    "httpx>=0.24.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/authoritydmc/flags-local"
+Repository = "https://github.com/authoritydmc/flags-local.git"

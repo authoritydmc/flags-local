@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+*.egg-info/
+.eggs/
+target/
+*.class
+*.log
+.DS_Store
+flags.json
+*.asc
+.idea/
+.vscode/

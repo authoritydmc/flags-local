@@ -1,0 +1,13 @@
+{
+  "name": "flags-local-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/server-cli",
+    "packages/client-js",
+    "packages/client-react"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
+  }
+}

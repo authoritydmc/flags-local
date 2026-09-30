@@ -1,0 +1,35 @@
+{
+  "name": "flags-local",
+  "version": "1.0.0",
+  "description": "Zero-dependency local & remote Feature Flags server with live UI, SSE stream, and multi-tenant environments",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "flags-local": "./bin/flags-local.js"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "launchdarkly-alternative",
+    "unleash-alternative",
+    "flagsmith-alternative",
+    "feature-management",
+    "sse",
+    "server"
+  ],
+  "author": "Raj Dubey <com.mailuser@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authoritydmc/flags-local.git",
+    "directory": "packages/server-cli"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node bin/flags-local.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3"
+  }
+}

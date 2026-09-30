@@ -1,0 +1,29 @@
+{
+  "name": "@authoritydmc/flags-react",
+  "version": "1.0.0",
+  "description": "React hooks and components (<FeatureGate />, useFlag) for flags-local",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Raj Dubey <com.mailuser@gmail.com>",
+  "license": "MIT",
+  "keywords": ["react", "feature-flags", "flags-local", "hooks", "feature-toggles"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authoritydmc/flags-local.git",
+    "directory": "packages/client-react"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0 || >=18.0.0 || >=19.0.0"
+  },
+  "dependencies": {
+    "@authoritydmc/flags-client": "^1.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.3"
+  }
+}
