@@ -1,5 +1,5 @@
 export interface FlagRule {
-  attribute: string; // e.g., "userId", "email", "role", "country"
+  attribute: string; // e.g., "userId", "email", "role", "country", "plan"
   operator: 'equals' | 'contains' | 'in' | 'greaterThan' | 'lessThan' | 'percentage';
   value: any;
 }
@@ -11,7 +11,8 @@ export interface FeatureFlag {
   enabled: boolean;
   value?: any; // boolean or dynamic JSON value (strings, numbers, config objects)
   percentage?: number; // 0 to 100
-  environments: Record<string, boolean>; // { "development": true, "production": false }
+  environments: Record<string, boolean>; // { "development": true, "staging": true, "production": false }
+  tags?: string[];
   rules?: FlagRule[];
   createdAt: string;
   updatedAt: string;
@@ -28,4 +29,10 @@ export interface EvaluationResult {
   enabled: boolean;
   value: any;
   reason: string;
+}
+
+export interface StorageAdapter {
+  load(): Promise<FeatureFlag[]>;
+  save(flags: FeatureFlag[]): Promise<void>;
+  subscribe?(callback: () => void): void;
 }

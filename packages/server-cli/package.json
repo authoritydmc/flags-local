@@ -1,7 +1,7 @@
 {
   "name": "flags-local",
-  "version": "1.0.0",
-  "description": "Zero-dependency local & remote Feature Flags server with live UI, SSE stream, and multi-tenant environments",
+  "version": "1.1.0",
+  "description": "Zero-dependency local & remote Feature Flags server with live UI, SSE stream, Redis cluster sync, and multi-environment management",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -14,6 +14,7 @@
     "unleash-alternative",
     "flagsmith-alternative",
     "feature-management",
+    "redis",
     "sse",
     "server"
   ],
@@ -28,8 +29,11 @@
     "build": "tsc",
     "start": "node bin/flags-local.js"
   },
+  "dependencies": {
+    "redis": "^4.7.1"
+  },
   "devDependencies": {
-    "@types/node": "^20.19.43",
-    "typescript": "^5.9.3"
+    "@types/node": "^20.17.19",
+    "typescript": "^5.7.3"
   }
 }

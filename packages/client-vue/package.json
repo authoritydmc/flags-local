@@ -1,0 +1,35 @@
+{
+  "name": "@authoritydmc/flags-vue",
+  "version": "1.0.0",
+  "description": "Vue 3 composables (useFlag) and components (FeatureGate) for flags-local",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Raj Dubey <com.mailuser@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "feature-flags",
+    "flags-local",
+    "composables"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/authoritydmc/flags-local.git",
+    "directory": "packages/client-vue"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@authoritydmc/flags-client": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.43"
+  }
+}

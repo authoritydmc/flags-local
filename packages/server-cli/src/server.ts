@@ -8,12 +8,13 @@ export interface ServerOptions {
   port?: number;
   host?: string;
   storePath?: string;
+  redisUrl?: string;
 }
 
 export function createFlagsServer(options: ServerOptions = {}) {
   const port = options.port || 4040;
   const host = options.host || '0.0.0.0';
-  const store = new FlagStore(options.storePath);
+  const store = new FlagStore({ filePath: options.storePath, redisUrl: options.redisUrl });
 
   const sseClients: Set<http.ServerResponse> = new Set();
 
@@ -28,7 +29,7 @@ export function createFlagsServer(options: ServerOptions = {}) {
     // CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Environment');
 
     if (req.method === 'OPTIONS') {
       res.writeHead(204);
@@ -62,10 +63,15 @@ export function createFlagsServer(options: ServerOptions = {}) {
       return;
     }
 
-    // 3. GET /api/v1/flags
+    // 3. GET /api/v1/flags (optional filter by ?tag=... or ?env=...)
     if (pathname === '/api/v1/flags' && req.method === 'GET') {
+      const tag = url.searchParams.get('tag');
+      let flags = store.getAll();
+      if (tag) {
+        flags = flags.filter(f => f.tags && f.tags.includes(tag));
+      }
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(store.getAll()));
+      res.end(JSON.stringify(flags));
       return;
     }
 
@@ -109,7 +115,7 @@ export function createFlagsServer(options: ServerOptions = {}) {
       const id = pathname.substring('/api/v1/flags/'.length);
       const body: FeatureFlag = await parseJsonBody(req);
       body.id = id;
-      store.set(body);
+      await store.set(body);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: true, flag: body }));
       return;
@@ -118,9 +124,16 @@ export function createFlagsServer(options: ServerOptions = {}) {
     // 7. DELETE /api/v1/flags/:id
     if (pathname.startsWith('/api/v1/flags/') && req.method === 'DELETE') {
       const id = pathname.substring('/api/v1/flags/'.length);
-      const deleted = store.delete(id);
+      const deleted = await store.delete(id);
       res.writeHead(deleted ? 200 : 404, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: deleted }));
+      return;
+    }
+
+    // 8. Healthcheck
+    if (pathname === '/healthz') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'ok', flagsCount: store.getAll().length }));
       return;
     }
 
@@ -135,7 +148,12 @@ export function createFlagsServer(options: ServerOptions = {}) {
       server.listen(port, host, () => {
         console.log(`\n🚀 [flags-local] Server running on http://${host === '0.0.0.0' ? 'localhost' : host}:${port}`);
         console.log(`🌐 Dashboard:  http://localhost:${port}`);
-        console.log(`📡 API Stream: http://localhost:${port}/api/v1/flags/stream\n`);
+        console.log(`📡 API Stream: http://localhost:${port}/api/v1/flags/stream`);
+        if (options.redisUrl) {
+          console.log(`🔄 Backend:    Redis Cluster (${options.redisUrl})\n`);
+        } else {
+          console.log(`💾 Backend:    Local JSON File\n`);
+        }
       });
     }
   };
